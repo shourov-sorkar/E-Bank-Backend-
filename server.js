@@ -3,7 +3,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { connect } = require("mongoose");
 const bodyParser = require("body-parser");
-const { database } = require("./src/config/database");
+const { database } = require("./config/DB/DB");
 const path = require("path");
 // View Engine Setup
 const app = express();
@@ -24,12 +24,12 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const fileRoute = require("./src/routes/file.routes");
+const fileRoute = require("./routes/file.routes");
 
 app.use("/file", fileRoute);
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/src/view/serverRunning.html"));
+  res.sendFile(path.join(__dirname, "/view/serverRunning.html"));
 });
 
 var port = process.env.PORT || 5000;
